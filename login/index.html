@@ -4,10 +4,12 @@
 <meta charset="utf-8">
 <title>ログイン</title>
 <style>
-  body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
-  form { border: 1px solid #ccc; padding: 20px; border-radius: 8px; }
-  input { display: block; margin-bottom: 10px; padding: 8px; width: 200px; }
-  button { padding: 8px 16px; }
+  body { font-family: sans-serif; display:flex; justify-content:center; align-items:center; height:100vh; }
+  form { border:1px solid #ccc; padding:20px; border-radius:8px; width:300px; }
+  input { width:100%; padding:8px; margin-bottom:10px; }
+  button { width:100%; padding:10px; }
+  .link { text-align:center; margin-top:8px; font-size:14px; }
+  .error { color:#c00; font-size:14px; min-height:18px; }
 </style>
 </head>
 <body>
@@ -15,10 +17,14 @@
     <h2>ログイン</h2>
     <input type="text" id="userId" placeholder="ユーザーID" required>
     <input type="password" id="password" placeholder="パスワード" required>
+    <div class="error" id="error"></div>
     <button type="submit">ログイン</button>
-    <div id="error" style="color:red; font-size:14px;"></div>
+    <div class="link"><a href="register.html">新規登録はこちら</a></div>
   </form>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
+  <script>
+    setupLogin(); // 共通ロジック呼び出し
+  </script>
 </body>
 </html>
