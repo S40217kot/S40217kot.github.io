@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>新規登録</title>
+<style>
+  body { font-family: sans-serif; display:flex; justify-content:center; align-items:center; height:100vh; }
+  form { border:1px solid #ccc; padding:20px; border-radius:8px; width:300px; }
+  label { display:block; margin:8px 0 4px; }
+  input { width:100%; padding:8px; margin-bottom:8px; }
+  button { width:100%; padding:10px; }
+  .link { text-align:center; margin-top:8px; font-size:14px; }
+  .error { color:#c00; font-size:14px; min-height:18px; }
+</style>
+</head>
+<body>
+  <form id="registerForm">
+    <h2>新規登録</h2>
+    <label for="userId">ユーザーID</label>
+    <input id="userId" required minlength="3" placeholder="例: yamada">
+
+    <label for="password">パスワード</label>
+    <input id="password" type="password" required minlength="6" placeholder="6文字以上">
+
+    <label for="confirm">パスワード（確認）</label>
+    <input id="confirm" type="password" required minlength="6">
+
+    <div class="error" id="error"></div>
+    <button type="submit">登録してログイン</button>
+    <div class="link"><a href="index.html">ログインへ戻る</a></div>
+  </form>
+
+  <script src="script.js"></script>
+  <script>
+    const form = document.getElementById('registerForm');
+    const errorEl = document.getElementById('error');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorEl.textContent = '';
+
+      const id = document.getElementById('userId').value.trim();
+      const pass = document.getElementById('password').value;
+      const confirm = document.getElementById('confirm').value;
+
+      if (id.length < 3) return errorEl.textContent = 'ユーザーIDは3文字以上にしてください。';
+      if (pass.length < 6) return errorEl.textContent = 'パスワードは6文字以上にしてください。';
+      if (pass !== confirm) return errorEl.textContent = 'パスワードが一致しません。';
+
+      try {
+        const users = await loadUsers(); // users.json + localStorage を合体
+        const exists = users.some(u => u.id === id);
+        if (exists) return errorEl.textContent = 'そのユーザーIDはすでに使われています。';
+
+        saveExtraUser({ id, password: pass }); // このブラウザに保存
+        localStorage.setItem('loggedInUser', id); // そのままログイン状態に
+        location.href = 'member.html';
+      } catch {
+        errorEl.textContent = 'ユーザー情報の確認に失敗しました。';
+      }
+    });
+  </script>
+</body>
+</html>
