@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>簡易ログイン</title>
+<style>
+  body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
+  form, .welcome { border: 1px solid #ccc; padding: 20px; border-radius: 8px; }
+  input { display: block; margin-bottom: 10px; padding: 8px; width: 200px; }
+  button { padding: 8px 16px; }
+</style>
+</head>
+<body>
+
+<div id="loginArea">
+  <form id="loginForm">
+    <h2>ログイン</h2>
+    <input type="text" id="userId" placeholder="ユーザーID" required>
+    <input type="password" id="password" placeholder="パスワード" required>
+    <button type="submit">ログイン</button>
+    <div id="error" style="color:red; font-size:14px;"></div>
+  </form>
+</div>
+
+<div id="welcomeArea" class="welcome" style="display:none;">
+  <h2 id="welcomeMsg"></h2>
+</div>
+
+<script>
+  // デモ用の固定IDとパスワード
+  const VALID_ID = "demo";
+  const VALID_PASS = "pass123";
+
+  const form = document.getElementById('loginForm');
+  const errorEl = document.getElementById('error');
+  const loginArea = document.getElementById('loginArea');
+  const welcomeArea = document.getElementById('welcomeArea');
+  const welcomeMsg = document.getElementById('welcomeMsg');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const id = document.getElementById('userId').value.trim();
+    const pass = document.getElementById('password').value;
+
+    if (id === VALID_ID && pass === VALID_PASS) {
+      // ログイン成功
+      welcomeMsg.textContent = `${id} 様、ようこそ！`;
+      loginArea.style.display = 'none';
+      welcomeArea.style.display = 'block';
+    } else {
+      // ログイン失敗
+      errorEl.textContent = "IDまたはパスワードが違います。";
+    }
+  });
+</script>
+
+</body>
+</html>
