@@ -1,1 +1,27 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>会員専用ページ</title>
+</head>
+<body>
+  <h2 id="welcome"></h2>
+  <button id="logoutBtn">ログアウト</button>
 
+<script>
+  const user = localStorage.getItem('loggedInUser');
+
+  if (!user) {
+    // ログインしていない場合はログインページへ
+    location.href = 'index.html';
+  } else {
+    document.getElementById('welcome').textContent = `${user} 様、ようこそ！`;
+  }
+
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    localStorage.removeItem('loggedInUser');
+    location.href = 'index.html';
+  });
+</script>
+</body>
+</html>
