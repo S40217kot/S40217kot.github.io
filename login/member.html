@@ -10,9 +10,7 @@
 
 <script>
   const user = localStorage.getItem('loggedInUser');
-
   if (!user) {
-    // ログインしていない場合はログインページへ
     location.href = 'index.html';
   } else {
     document.getElementById('welcome').textContent = `${user} 様、ようこそ！`;
