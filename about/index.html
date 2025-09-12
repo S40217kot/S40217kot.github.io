@@ -1,3 +1,25 @@
+---
+layout: default
+title: 404 Not Found
+---
+<!DOCTYPE html>
+<html>
+<head>
+  <title>404</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <h1>404NotFound</h1>
+  <h2>お探しになったページは移動、削除または一時的にアクセスができない場合があります。</h2>
+  <h2>ご迷惑をおかけしますが、もう一度ホームからアクセスしてください。</h2>
+  <a href="/">Homeへ</a>
+  <h3></h3>
+  <p id="url"></p>
+    <script>
+        const currentURL = window.location.href;
+        document.getElementById('url').textContent = `リクエスト: ${currentURL}`;
+    </script>
+</body>
 <!DOCTYPE html>
 <html>
 <head>
