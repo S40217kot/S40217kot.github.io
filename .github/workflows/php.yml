@@ -1,0 +1,19 @@
+name: Run PHP Script
+
+on:
+  workflow_dispatch: # 手動実行用
+
+jobs:
+  run-php:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
+      - name: Run PHP script
+        run: php index.php
